@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <input type="checkbox">
+    <input type="checkbox" checked>
+    <input type="text" id="message">
+
+    <h3 id="widget-title">Сообщения:</h3>
+    <ul id="messages">
+        <li id="message-1">Сообщение 1</li>
+        <li id="message-2">Сообщение 2</li>
+        <li id="message-3" data-action="delete">Сообщение 3</li>
+        <li id="message-4" data-action="edit do-not-delete">Сообщение 4</li>
+        <li id="message-5" data-action="edit delete">Сообщение 5</li>
+        <li><a href="#">...</a></li>
+    </ul>
+
+
+    <a href="http://site.com/list.zip">Ссылка на архив</a>
+    <a href="http://site.com/list.pdf">..И на PDF</a>
+
+
+    <script>
+        function test(selector, count) {
+            var elems = document.querySelectorAll(selector);
+            var ok = (elems.length == count);
+
+            if (!ok) alert(selector + ": " + elems.length + " != " + count);
+        }
+        test('input[type="checkbox"]', 2);
+        test('input[type="checkbox"]:not(:checked)', 1);
+        test('[id|="message"]', 6);
+        test('[id^="message-"]', 5);
+        test('a[href$=".zip"]', 1);
+        test('[data-action~="delete"]', 2);
+        test('[data-action]:not([data-action~="delete"])', 1);
+        test('#messages li:nth-child(2n)', 3);
+        test('h3#widget-title + *', 1);
+        test('h3#widget-title ~ a', 2);
+        test('#messages li:last-child a', 1);
+    </script>
+
+    Текст вверху без отступа от списка.
+    <ul>
+        <li>Маша</li>
+        <li>Паша</li>
+        <li>Даша</li>
+        <li>Женя</li>
+        <li>Саша</li>
+        <li>Гоша</li>
+    </ul>
+    Текст внизу без отступа от списка.
+    <style>
+        body {
+            font: 14px/1.5 serif;
+        }
+
+        ul {
+            margin: 0;
+        }
+
+        /* li:nth-child(n+2) {
+            margin-top: 1.5em;
+        } */
+
+        li:nth-child(odd):not(:first-child) {
+            margin-top: 1.5em;
+        }
+    </style>
+</body>
+
+</html>
